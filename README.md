@@ -7,7 +7,7 @@
 
 ## Contents
 ## 1. LatticeBoltzmannMethod
-##    Fluid FLow (Pure fluid flow simulation MATLAB computing and visualization code in three versions)
+Fluid FLow (Pure fluid flow simulation MATLAB computing and visualization code in three versions)
 
 
 ## Acknowledgement
