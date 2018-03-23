@@ -1,10 +1,10 @@
-%%%% 2d Cavity lid drived flow simulation
-%%%% Aurthor: Yang Yang
+%%%% 2d Cavity Lid-driven Flow simulation
+%%%% Author: Yang Yang
 %%%% Date : Tue Apr 7 2015
 %% Programming Initial code
 close all; clear all; clc; tic; 
-feature accel on;
-feature jit on;
+feature accel on;                    % For-loop optimization on 
+feature jit on;                      % Just in time on
 fprintf('Programming LidDrivedFlowMain Running ... \n');
 %% Global Varibles
 global Q Lx_Physics Ly_Physics Nx Ny U ex ey omega delta_x delta_y ...
@@ -12,13 +12,13 @@ global Q Lx_Physics Ly_Physics Nx Ny U ex ey omega delta_x delta_y ...
    
 %% Physical Parameters (Water)
 rho_Physics = 9.98323e+02 ;  % Physical Density (kg/m^3)
-nu_Physics = 9.98287e-07; % Physical Dynamic viscosity(m^2/s)
-cs_Physics = 1482 ;      % Physical Speed of sound (m/s)
-Re_Physics = 200   ;     % Reynold number
-Lx_Physics = 1e-6;        % Physical Length in x direction (m)
-Ly_Physics = 1e-6;        % Physical Length in y direction (m)
-Nx = 256;               % grid numbers in x direction (must equal to that in y)
-Ny = 256;               % grid numbers in y direction
+nu_Physics = 9.98287e-07;    % Physical Dynamic viscosity(m^2/s)
+cs_Physics = 1482 ;          % Physical Speed of sound (m/s)
+Re_Physics = 200   ;         % Reynold number
+Lx_Physics = 1e-6;           % Physical Length in x direction (m)
+Ly_Physics = 1e-6;           % Physical Length in y direction (m)
+Nx = 256;                    % grid numbers in x direction (must equal to that in y)
+Ny = 256;                    % grid numbers in y direction
 
 
 %% Lattice Parameters

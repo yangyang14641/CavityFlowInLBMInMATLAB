@@ -1,10 +1,10 @@
-%%%% 2d Cavity lid drived flow simulation
-%%%% Aurthor: Yang Yang
+%%%% 2d Cavity Lid-driven Flow simulation
+%%%% Author: Yang Yang
 %%%% Date : Tue Apr 7 2015
 %% Programming Initial code
 close all; clear all; clc; tic; 
-feature accel on;
-feature jit on;
+feature accel on;        % for-loop Optimization on
+feature jit on;          % just in time on
 fprintf('Programming LidDrivedFlowMain Running ... \n');
 %% Global Varibles
 global Q Lx Ly Nx Ny U ev omega delta_x delta_y ...
@@ -18,7 +18,7 @@ Nx = 256;      % grid numbers in x direction (must equal to that in y)
 Ny = 256;      % grid numbers in y direction
 U = 0.1;        % velocity of lid
 rho_0 = 1.;    % reference density
-Re = 1000 ;    % Reynold number
+Re = 200 ;    % Reynold number
 
 % Discrete velocity :
 ev = [0  1  0 -1  0  1 -1 -1  1
