@@ -1,5 +1,5 @@
 %-----------------------------------------------------------------------------------------------
-%%%% 2d Cavity Lid-driven Flow simulation
+%%%% 2d Cavity Lid-driven Flow simulation MATLAB code  (Lattice Unit to Physical Unit Conversion)
 %%%% Author: Yang Yang
 %%%% Date : Tue Apr 7 2015
 %%%%
@@ -81,7 +81,7 @@ f_temp = f;                 % temporary distribution function (t)
 feq = f;                    % equilibrium distribution function
 %% Residual in compution (Breaking criteria) Control
 CheckResidualInterval = 5;     % check interval 
-residual = 1e-6;                 % breaking criteria   
+residual = 1e-5;                 % breaking criteria   
 tmax = 1e7;                      % max time step 
 epsilon = 0;
 ht = figure('name','Erro VS Time');        % Relative Error time plot 

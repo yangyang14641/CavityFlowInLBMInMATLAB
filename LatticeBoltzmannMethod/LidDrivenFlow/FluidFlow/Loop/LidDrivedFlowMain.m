@@ -1,4 +1,4 @@
-%----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------------------
 %%%% 2d Cavity Lid-driven Flow simulation MATLAB Code (for-loop implement version)
 %%%% Author: Yang Yang
 %%%% Date : Tue Apr 7 2015
@@ -16,7 +16,7 @@
 %%%% because of the limitation of my own knowledge and strength. 
 %%%% As a result: THESE DOCUMENTS AND CODES ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
 %%%% I MAKE NO WARRANTIES, EXPRESS OR IMPLIED, THAT THEY ARE FREE OF ERROR. 
-%----------------------------------------------------------------------------------
+%------------------------------------------------------------------------------------------------
 
 %% Programming Initialization
 close all; clear all; clc; tic; 
@@ -65,7 +65,7 @@ feq_w = feq;
 feq_f = feq;
 % Residual in compution (Breaking criteria) Control
 CheckResidualInterval = 10;     % check interval
-residual = 1e-6;                % breaking criteria   
+residual = 1e-5;                % breaking criteria   
 tmax = 1e7;                     % max time step 
 epsilon = 0;
 ht = figure('name','Erro VS Time');        % Relative Error time plot
