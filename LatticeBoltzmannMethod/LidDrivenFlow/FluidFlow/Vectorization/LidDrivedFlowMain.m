@@ -1,24 +1,41 @@
-%%%% 2d Cavity Lid-driven Flow simulation
-%%%% Aurthor: Yang Yang
+%---------------------------------------------------------------------------------------------
+%%%% 2d Cavity Lid-driven Flow simulation MATLAB Code (Vectorization)
+%%%% Author: Yang Yang
 %%%% Date : Tue Apr 7 2015
-%% Programming Initial code
+%%%% 
+%%%% Background:
+%%%% This code is part of Yang Yang's B.Eng. Thesis works,
+%%%% As a verify of Yang Yang's Algorithms and Codes' correctness.
+%%%%
+%%%% Copyright:
+%%%% You can copy and use this code for any purpose, but you must declare 
+%%%% that the original version of this code was written by Yang Yang
+%%%%
+%%%% Disclaimer of Warranty:  
+%%%% Maybe, there are many mistakes in this code, both in fundamental theory and programming,  
+%%%% because of the limitation of my own knowledge and strength. 
+%%%% As a result: THESE DOCUMENTS AND CODES ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+%%%% I MAKE NO WARRANTIES, EXPRESS OR IMPLIED, THAT THEY ARE FREE OF ERROR. 
+%----------------------------------------------------------------------------------------------
+
+%% Programming Initialization
 close all; clear all; clc; tic; 
-feature accel on;                % For-loop optimization on
-feature jit on;                  % just in time on
+feature accel on;                 % Acceleration on
+feature jit on;                   % Just in time on
 fprintf('Programming LidDrivedFlowMain Running ... \n');
 %% Global Varibles
 global Q Lx Ly Nx Ny U ex ey omega delta_x delta_y ...
        delta_t rho_0 c Re mu tau_f Dimension
-% Parameters
-Dimension = 2; % Problem's Dimension
-Q = 9;         % Qian 9 D2Q9 Velocity model 
-Lx = 256;       % Length in x direction
-Ly = 256;       % Length in y direction
-Nx = 256;      % grid numbers in x direction (must equal to that in y)
-Ny = 256;      % grid numbers in y direction
-U = 0.1;        % velocity of lid
-rho_0 = 1.;    % reference density
-Re = 200 ;     % Reynold number
+% Model's parameters
+Dimension = 2;   % Problem's Dimension
+Q = 9;           % Qian 9 D2Q9 Velocity model 
+Lx = 256;        % Length in x direction
+Ly = 256;        % Length in y direction
+Nx = 256;        % grid numbers in x direction (must equal to that in y)
+Ny = 256;        % grid numbers in y direction
+U = 0.1;         % velocity of lid
+rho_0 = 1.;      % reference density
+Re = 200 ;       % Reynold number
 
 % Discrete velocity :
 ex = [0  1  0 -1  0  1 -1 -1  1];
@@ -47,11 +64,11 @@ f = zeros(Nx+1,Ny+1,Q);     % distribution function  (t+1)
 f_temp = f;                 % temporary distribution function (t)
 feq = f;                    % equilibrium distribution function
 %% Residual in compution (Breaking criteria) Control
-CheckResidualInterval = 10;     % check interval 
-residual = 1e-6;                 % breaking criteria   
-tmax = 1e7;                      % max time step 
-epsilon = 0;
-ht = figure('name','Erro VS Time');        % Relative Error time plot 
+CheckResidualInterval = 10;               % check interval 
+residual = 1e-6;                          % breaking criteria   
+tmax = 1e7;                               % max time step 
+epsilon = 0;                              % relative error
+ht = figure('name','Erro VS Time');       % relative Error time plot 
 set(ht,'Color',[1 1 1],'menubar','none')
 
 %% Outputs control

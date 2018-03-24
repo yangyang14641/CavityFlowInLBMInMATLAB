@@ -1,6 +1,22 @@
+%-----------------------------------------------------------------------------------------------
 %%%% 2d Cavity Lid-driven Flow simulation
 %%%% Author: Yang Yang
 %%%% Date : Tue Apr 7 2015
+%%%%
+%%%% Background:
+%%%% This code is part of Yang Yang's B.Eng. Thesis works,
+%%%% As a verify of Yang Yang's Algorithms and Codes' correctness.
+%%%%
+%%%% Copyright:
+%%%% You can copy and use this code for any purpose, but you must declare 
+%%%% that the original version of this code was written by Yang Yang
+%%%%
+%%%% Disclaimer of Warranty:  
+%%%% Maybe, there are many mistakes in this code, both in fundamental theory and programming,  
+%%%% because of the limitation of my own knowledge and strength. 
+%%%% As a result: THESE DOCUMENTS AND CODES ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+%%%% I MAKE NO WARRANTIES, EXPRESS OR IMPLIED, THAT THEY ARE FREE OF ERROR. 
+%------------------------------------------------------------------------------------------------
 %% Programming Initial code
 close all; clear all; clc; tic; 
 feature accel on;                    % For-loop optimization on 
