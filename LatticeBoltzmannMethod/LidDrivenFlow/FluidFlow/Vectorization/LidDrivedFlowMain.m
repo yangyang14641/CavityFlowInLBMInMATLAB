@@ -54,21 +54,21 @@ tau_f = 3. * mu / (c^2. * delta_t) + 1./2. ;  % Relaxaition time
 
 %% Local Varibles     
 % Macroscopic 
-rho = zeros(Nx+1,Ny+1);     % macro density
-ux = zeros(Nx+1,Ny+1);      % macro velocity x-direction
-uy = ux;                    % macro velocity y-direction
-ux_temp = ux;               % macro temporary velocity
-uy_temp = uy;               % micro temporary velocity
+rho = zeros(Nx+1,Ny+1);                       % macro density
+ux = zeros(Nx+1,Ny+1);                        % macro velocity x-direction
+uy = ux;                                      % macro velocity y-direction
+ux_temp = ux;                                 % macro temporary velocity
+uy_temp = uy;                                 % micro temporary velocity
 % Mesoscopic
-f = zeros(Nx+1,Ny+1,Q);     % distribution function  (t+1)
-f_temp = f;                 % temporary distribution function (t)
-feq = f;                    % equilibrium distribution function
+f = zeros(Nx+1,Ny+1,Q);                       % distribution function  (t+1)
+f_temp = f;                                   % temporary distribution function (t)
+feq = f;                                      % equilibrium distribution function
 %% Residual in compution (Breaking criteria) Control
-CheckResidualInterval = 10;               % check interval 
-residual = 1e-5;                          % breaking criteria   
-tmax = 1e7;                               % max time step 
-epsilon = 0;                              % relative error
-ht = figure('name','Erro VS Time');       % relative Error time plot 
+CheckResidualInterval = 10;                   % check interval 
+residual = 1e-5;                              % breaking criteria   
+tmax = 1e7;                                   % max time step 
+epsilon = 0;                                  % relative error
+ht = figure('name','Erro VS Time');           % relative Error time plot 
 set(ht,'Color',[1 1 1],'menubar','none')
 
 %% Outputs control
@@ -124,7 +124,7 @@ for t=1:tmax
 
    % BCs  compute f(t+delta_t) at boundary
      % left 
-       rho(1,2:Ny) = rho(2,2:Ny);         % Using neighbor point's density
+       rho(1,2:Ny) = rho(2,2:Ny);            % Using neighbor point's density
        ux(1,2:Ny) = 0;
        uy(1,2:Ny) = 0;
         [feq(1,2:Ny,1),feq(1,2:Ny,2),feq(1,2:Ny,3),feq(1,2:Ny,4),...
@@ -145,7 +145,7 @@ for t=1:tmax
        end
       % top
        rho(1:Nx+1,Ny+1) = rho(1:Nx+1,Ny);
-       ux(1:Nx+1,Ny+1) = U;                      % lid velocity
+       ux(1:Nx+1,Ny+1) = U;                    % lid velocity
        uy(1:Nx+1,Ny+1) = 0;
         [feq(1:Nx+1,Ny+1,1),feq(1:Nx+1,Ny+1,2),feq(1:Nx+1,Ny+1,3),feq(1:Nx+1,Ny+1,4),...
          feq(1:Nx+1,Ny+1,5),feq(1:Nx+1,Ny+1,6),feq(1:Nx+1,Ny+1,7),feq(1:Nx+1,Ny+1,8),feq(1:Nx+1,Ny+1,9)] ...
@@ -155,7 +155,7 @@ for t=1:tmax
        end
       % bottom
        rho(1:Nx+1,1) = rho(1:Nx+1,2);
-       ux(1:Nx+1,1) = 0;                      % lid velocity
+       ux(1:Nx+1,1) = 0;                       % lid velocity
        uy(1:Nx+1,1) = 0;
         [feq(1:Nx+1,1,1),feq(1:Nx+1,1,2),feq(1:Nx+1,1,3),feq(1:Nx+1,1,4),...
          feq(1:Nx+1,1,5),feq(1:Nx+1,1,6),feq(1:Nx+1,1,7),feq(1:Nx+1,1,8),feq(1:Nx+1,1,9)] ...
@@ -211,7 +211,7 @@ time_hour = floor(time_used / 3600);
 time_minute = floor((time_used - time_hour*3600) / 60);
 time_second = time_used - time_hour*3600 - time_minute*60;
 % output log file
-fp = fopen([file_log,'.log'],'w');            % log of programming
+fp = fopen([file_log,'.log'],'w');            % log of computing
 fprintf(fp,'Programming name: %s \n',files_name);
 fprintf(fp,'Time step: %d, Final relative Error: %.10f \n',t,epsilon);
 fprintf(fp,'Using time :   %d hour,   %d minute,   %f second \n',time_hour,time_minute,time_second);

@@ -27,15 +27,15 @@ fprintf('Programming LidDrivedFlowMain Running ... \n');
 global Q Lx Ly Nx Ny U ev omega delta_x delta_y ...
        delta_t rho_0 c Re mu tau_f Dimension
 % Model's parameters
-Dimension = 2;   % Problem's Dimension
-Q = 9;           % Qian 9 D2Q9 Velocity model 
-Lx = 1.;         % Length in x direction
-Ly = 1.;         % Length in y direction
-Nx = 256;        % grid numbers in x direction (must equal to that in y)
-Ny = 256;        % grid numbers in y direction
-U = 0.1;         % velocity of lid
-rho_0 = 1.;      % reference density
-Re = 200 ;       % Reynold number
+Dimension = 2;                    % Problem's Dimension
+Q = 9;                            % Qian 9 D2Q9 Velocity model 
+Lx = 1.;                          % Length in x direction
+Ly = 1.;                          % Length in y direction
+Nx = 256;                         % grid numbers in x direction (must equal to that in y)
+Ny = 256;                         % grid numbers in y direction
+U = 0.1;                          % velocity of lid
+rho_0 = 1.;                       % reference density
+Re = 200 ;                        % Reynold number
 
 % Discrete velocity :
 ev = [0  1  0 -1  0  1 -1 -1  1
@@ -54,21 +54,21 @@ tau_f = 3. * mu / (c^2. * delta_t) + 1./2. ;  % Relaxaition time
 
 %% Local Varibles     
 % Macroscopic 
-rho = zeros(Nx+1,Ny+1);     % macro density
-u = zeros(Nx+1,Ny+1,2);     % macro velocity
-u_temp = u;                 % macro temporary velocity
+rho = zeros(Nx+1,Ny+1);                       % macro density
+u = zeros(Nx+1,Ny+1,2);                       % macro velocity
+u_temp = u;                                   % macro temporary velocity
 % Mesoscopic
-f = zeros(Nx+1,Ny+1,Q);     % distribution function
-f_temp = f;                 % temporary distribution function
-feq = zeros(Q,1);           % equilibrium distribution function
+f = zeros(Nx+1,Ny+1,Q);                       % distribution function
+f_temp = f;                                   % temporary distribution function
+feq = zeros(Q,1);                             % equilibrium distribution function
 feq_w = feq;
 feq_f = feq;
 % Residual in compution (Breaking criteria) Control
-CheckResidualInterval = 10;     % check interval
-residual = 1e-5;                % breaking criteria   
-tmax = 1e7;                     % max time step 
+CheckResidualInterval = 10;                   % check interval
+residual = 1e-5;                              % breaking criteria   
+tmax = 1e7;                                   % max time step 
 epsilon = 0;
-ht = figure('name','Erro VS Time');        % Relative Error time plot
+ht = figure('name','Erro VS Time');           % Relative Error time plot
 set(ht,'Color',[1 1 1],'menubar','none')
 % Outputs control
 OutputsInterval = 50;
@@ -111,26 +111,26 @@ for t=1:tmax
     for i = 2:Nx
         for j = 2:Ny
               for k = 1:Q
-                   rho(i,j) = rho(i,j) + f(i,j,k);          % rho = Sigma f_alpha 
+                   rho(i,j) = rho(i,j) + f(i,j,k);                % rho = Sigma f_alpha 
                                                    
                    u(i,j,1) = u(i,j,1) + f(i,j,k).*ev(1,k);  
-                   u(i,j,2) = u(i,j,2) + f(i,j,k).*ev(2,k);  % rho*u = Sigma e_alpha*f_alpha 
+                   u(i,j,2) = u(i,j,2) + f(i,j,k).*ev(2,k);       % rho*u = Sigma e_alpha*f_alpha 
               end
         end
     end
      
     for i = 2:Nx
         for j = 2:Ny
-             u(i,j,:) =  u(i,j,:) / rho(i,j);              % u = rho*u / rho
+             u(i,j,:) =  u(i,j,:) / rho(i,j);                     % u = rho*u / rho
         end
     end
 
    % BCs
     % left 
     for j = 2:Ny
-       rho(1,j) = rho(2,j);                       % Using neighbor point's density
+       rho(1,j) = rho(2,j);                                       % Using neighbor point's density
        u(1,j,:) = 0;                                
-       feq_w = f_eq(rho(1,j), u(1,j,:));          % here u(1,j,:) = 0  all the time
+       feq_w = f_eq(rho(1,j), u(1,j,:));                          % here u(1,j,:) = 0  all the time
        feq_f = f_eq(rho(2,j), u(2,j,:));
        for m = 1:Q
           f(1,j,m) = feq_w(m) + (f(2,j,m) - feq_f(m));
@@ -147,7 +147,7 @@ for t=1:tmax
     % top
     for i = 1:Nx+1
        rho(i,Ny+1) = rho(i,Ny);
-       u(i,Ny+1,1) = U;                            % lid velocity
+       u(i,Ny+1,1) = U;                                             % lid velocity
        u(i,Ny+1,2) = 0;
        feq_w = f_eq(rho(i,Ny+1), u(i,Ny+1,:));
        feq_f = f_eq(rho(i,Ny), u(i,Ny,:));
@@ -210,7 +210,7 @@ time_hour = floor(time_used / 3600);
 time_minute = floor((time_used - time_hour*3600) / 60);
 time_second = time_used - time_hour*3600 - time_minute*60;
 % output log file
-fp = fopen([file_log,'.log'],'w');            % log of programming
+fp = fopen([file_log,'.log'],'w');            % log of computing
 fprintf(fp,'Programming name: %s \n',files_name);
 fprintf(fp,'Time step: %d, Final relative Error: %.10f \n',t,epsilon);
 fprintf(fp,'Using time :   %d hour,   %d minute,   %f second \n',time_hour,time_minute,time_second);

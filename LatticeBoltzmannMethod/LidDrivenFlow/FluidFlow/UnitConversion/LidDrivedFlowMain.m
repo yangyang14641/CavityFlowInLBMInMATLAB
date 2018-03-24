@@ -27,24 +27,24 @@ global Q Lx_Physics Ly_Physics Nx Ny U ex ey omega delta_x delta_y ...
        delta_t rho_0 c  tau_f Dimension Re_Physics cs_Physics u_r rho_r L_r t_r
    
 %% Physical Parameters (Water)
-rho_Physics = 9.98323e+02 ;  % Physical Density (kg/m^3)
-nu_Physics = 9.98287e-07;    % Physical Dynamic viscosity(m^2/s)
-cs_Physics = 1482 ;          % Physical Speed of sound (m/s)
-Re_Physics = 200   ;         % Reynold number
-Lx_Physics = 1e-6;           % Physical Length in x direction (m)
-Ly_Physics = 1e-6;           % Physical Length in y direction (m)
-Nx = 256;                    % grid numbers in x direction (must equal to that in y)
-Ny = 256;                    % grid numbers in y direction
+rho_Physics = 9.98323e+02 ;          % Physical Density (kg/m^3)
+nu_Physics = 9.98287e-07;            % Physical Dynamic viscosity(m^2/s)
+cs_Physics = 1482 ;                  % Physical Speed of sound (m/s)
+Re_Physics = 200   ;                 % Reynold number
+Lx_Physics = 1e-6;                   % Physical Length in x direction (m)
+Ly_Physics = 1e-6;                   % Physical Length in y direction (m)
+Nx = 256;                            % grid numbers in x direction (must equal to that in y)
+Ny = 256;                            % grid numbers in y direction
 
 
 %% Lattice Parameters
-Dimension = 2;     % Problem's Dimension
-Q = 9;             % Qian 9 D2Q9 Velocity model 
-c = 1;             % Lattice speed               
-delta_x = 1 ;      % Lattice space step interval
-delta_y = 1 ;      % Lattice grid step length in each direction must equal  
-delta_t = 1 / c ;  % Lattice time step interval
-rho_0 = 1.;        % Lattice density
+Dimension = 2;                       % Problem's Dimension
+Q = 9;                               % Qian 9 D2Q9 Velocity model 
+c = 1;                               % Lattice speed               
+delta_x = 1 ;                        % Lattice space step interval
+delta_y = 1 ;                        % Lattice grid step length in each direction must equal  
+delta_t = 1 / c ;                    % Lattice time step interval
+rho_0 = 1.;                          % Lattice density
 
 %% Compute Refernce parameters
 u_r = cs_Physics / ( (1/sqrt(3)) * c );      % Reference velocity
@@ -70,19 +70,19 @@ omega= [4./9. 1./9. 1./9. 1./9. 1./9. ...
      
 %% Local Varibles     
 % Macroscopic 
-rho = zeros(Nx+1,Ny+1);     % macro density
-ux = zeros(Nx+1,Ny+1);      % macro velocity x-direction
-uy = ux;                    % macro velocity y-direction
-ux_temp = ux;               % macro temporary velocity
-uy_temp = uy;               % micro temporary velocity
+rho = zeros(Nx+1,Ny+1);                    % macro density
+ux = zeros(Nx+1,Ny+1);                     % macro velocity x-direction
+uy = ux;                                   % macro velocity y-direction
+ux_temp = ux;                              % macro temporary velocity
+uy_temp = uy;                              % micro temporary velocity
 % Mesoscopic
-f = zeros(Nx+1,Ny+1,Q);     % distribution function  (t+1)
-f_temp = f;                 % temporary distribution function (t)
-feq = f;                    % equilibrium distribution function
-%% Residual in compution (Breaking criteria) Control
-CheckResidualInterval = 5;     % check interval 
-residual = 1e-5;                 % breaking criteria   
-tmax = 1e7;                      % max time step 
+f = zeros(Nx+1,Ny+1,Q);                    % distribution function  (t+1)
+f_temp = f;                                % temporary distribution function (t)
+feq = f;                                   % equilibrium distribution function
+%% Residual in compution (time loop breaking criteria) Control
+CheckResidualInterval = 5;                 % check interval 
+residual = 1e-5;                           % breaking criteria   
+tmax = 1e7;                                % max time step 
 epsilon = 0;
 ht = figure('name','Erro VS Time');        % Relative Error time plot 
 set(ht,'Color',[1 1 1],'menubar','none')
@@ -227,7 +227,7 @@ time_hour = floor(time_used / 3600);
 time_minute = floor((time_used - time_hour*3600) / 60);
 time_second = time_used - time_hour*3600 - time_minute*60;
 % output log file
-fp = fopen([file_log,'.log'],'w');            % log of programming
+fp = fopen([file_log,'.log'],'w');            % log of computing
 fprintf(fp,'Programming name: %s \n',files_name);
 fprintf(fp,'Time step: %d, Final relative Error: %.10f \n',t,epsilon);
 fprintf(fp,'Using time :   %d hour,   %d minute,   %f second \n',time_hour,time_minute,time_second);
