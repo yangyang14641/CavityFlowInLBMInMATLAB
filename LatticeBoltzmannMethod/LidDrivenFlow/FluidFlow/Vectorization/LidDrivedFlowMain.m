@@ -212,12 +212,12 @@ time_minute = floor((time_used - time_hour*3600) / 60);
 time_second = time_used - time_hour*3600 - time_minute*60;
 % output log file
 fp = fopen([file_log,'.log'],'w');            % log of computing
-fprintf(fp,'Programming name: %s \n',files_name);
+fprintf(fp,'Program name: %s \n',files_name);
 fprintf(fp,'Time step: %d, Final relative Error: %.10f \n',t,epsilon);
 fprintf(fp,'Using time :   %d hour,   %d minute,   %f second \n',time_hour,time_minute,time_second);
 fclose(fp);
 % print log
 fprintf('Time step: %d, Final relative Error: %.10f \n',t,epsilon);
 fprintf('Using time :   %d hour,   %d minute,   %f second \n',time_hour,time_minute,time_second);
-fprintf('Programming LidDrivedFlowMain paused! Press Any key to exit ... \n');
+fprintf('Program LidDrivedFlowMain paused! Press Any key to exit ... \n');
 pause;
